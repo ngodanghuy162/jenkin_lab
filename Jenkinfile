@@ -1,7 +1,14 @@
 node {
     stage('Checkout') {
         // Lấy mã nguồn từ repository
-        git 'https://github.com/ngodanghuy162/jenkin_lab.git'
+                    // Lấy mã nguồn từ repository
+        checkout scmGit(branches: [[name: '*/main'], [name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: 'github_credential', url: 'https://github.com/ngodanghuy162/jenkin_lab']])
+            // git branch: 'main',
+            //     credentialsId: 'github_credential',
+            //     url: 'https://github.com/ngodanghuy162/jenkin_lab.git'
+        env.GIT_URL = sh(script: "git config --get remote.origin.url", returnStdout: true).trim()
+        env.GIT_BRANCH = sh(script: "git rev-parse --abbrev-ref HEAD", returnStdout: true).trim()
+        env.GIT_COMMIT = sh(script: "git rev-parse HEAD", returnStdout: true).trim()
     }
 
     stage('Info') {
