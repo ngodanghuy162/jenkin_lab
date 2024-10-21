@@ -1,0 +1,32 @@
+node {
+    stage('Checkout') {
+        // Lấy mã nguồn từ repository
+        git 'https://github.com/ngodanghuy162/jenkin_lab.git'
+    }
+
+    stage('Info') {
+        echo "Tên job: ${env.JOB_NAME}"
+        echo "ID build: ${env.BUILD_ID}"
+        echo "Từ nhánh: ${env.BRANCH_NAME}"
+        echo "Commit hiện tại: ${env.GIT_COMMIT}"
+        echo "Workspace: ${env.WORKSPACE}"
+    }
+
+    // Chạy test chỉ khi có push lên Git
+    if (env.GIT_BRANCH !=~ /tags/) {
+        stage('Build') {
+            echo "Build khi có push"
+        }
+
+        stage('Test') {
+            echo 'Test'
+        }
+    }
+
+    // Chỉ build và push image khi có tag mới
+    if (env.GIT_TAG) {
+        stage('Build Docker Image') {
+            echo "Build image khi có tag"
+        }
+    }
+}
