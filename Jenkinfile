@@ -1,7 +1,7 @@
 node {
     stage('Checkout') {
         // Lấy mã nguồn từ repository
-        git 'https://github.com/ngodanghuy162/jenkin_lab.git'
+        // git 'https://github.com/ngodanghuy162/jenkin_lab.git'
     }
 
     stage('Info') {
