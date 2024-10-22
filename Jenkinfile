@@ -1,7 +1,7 @@
 node {
     try {
         stage('Checkout') {
-        checkout scmGit(branches: [[name: '**'], [name: '**/*'], [name: '**'], [name: 'refs/tags/*']], extensions: [], userRemoteConfigs: [[credentialsId: 'github_credential', url: 'https://github.com/ngodanghuy162/jenkin_lab']])
+        checkout scmGit(branches: [[name: '**'], [name: '**/*'], [name: '**'], [name: 'refs/tags/*'], [name: 'refs/tags/**']], extensions: [], userRemoteConfigs: [[credentialsId: 'github_credential', url: 'https://github.com/ngodanghuy162/jenkin_lab']])
             // git branch: 'main',
             //     credentialsId: 'github_credential',
             //     url: 'https://github.com/ngodanghuy162/jenkin_lab.git'
@@ -22,6 +22,7 @@ node {
         jenkinsfile_script.printMessage("test ms")
         jenkinsfile_script.printMessage("printe ms test 2")
         jenkinsfile_script.printHello()
+        jenkinsfile_script.a()
     } catch (Exception e) {
         // Xử lý lỗi
         echo "Đã xảy ra lỗi: ${e.message}"
