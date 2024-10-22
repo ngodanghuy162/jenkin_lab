@@ -10,15 +10,7 @@ node {
         env.GIT_COMMIT = sh(script: "git rev-parse HEAD", returnStdout: true).trim()
         }
         jenkinsfile_script = load 'loadfile1.groovy'
-    
-        stage('Info') {
-            echo "Tên job: ${env.JOB_NAME}"
-            echo "ID build: ${env.BUILD_ID}"
-            echo "Từ nhánh: ${env.BRANCH_NAME}"
-            echo "Commit hiện tại: ${env.GIT_COMMIT}"
-            echo "Workspace: ${env.WORKSPACE}"
-        }
-    
+
         jenkinsfile_script.printMessage("test ms")
         jenkinsfile_script.printMessage("printe ms")
         jenkinsfile_script.printHello()
