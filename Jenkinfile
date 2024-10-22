@@ -1,23 +1,37 @@
 node {
     try {
         stage('Checkout') {
-        checkout scmGit(branches: [[name: '**'], [name: '**/*'], [name: '**'], [name: 'refs/tags/*'], [name: 'refs/tags/**']], extensions: [], userRemoteConfigs: [[credentialsId: 'github_credential', url: 'https://github.com/ngodanghuy162/jenkin_lab']])
-            // git branch: 'main',
-            //     credentialsId: 'github_credential',
-            //     url: 'https://github.com/ngodanghuy162/jenkin_lab.git'
-        env.GIT_URL = sh(script: "git config --get remote.origin.url", returnStdout: true).trim()
-        env.GIT_BRANCH = sh(script: "git rev-parse --abbrev-ref HEAD", returnStdout: true).trim()
-        env.GIT_COMMIT = sh(script: "git rev-parse HEAD", returnStdout: true).trim()
-        }
-        jenkinsfile_script = load 'loadfile1.groovy'
+            checkout scmGit(
+                branches: [
+                    [name: '**'], 
+                    [name: '**/*'], 
+                    [name: 'refs/tags/*'], 
+                    [name: 'refs/tags/**']
+                ], 
+                extensions: [], 
+                userRemoteConfigs: [[
+                    credentialsId: 'github_credential', 
+                    url: 'https://github.com/ngodanghuy162/jenkin_lab'
+                ]]
+            )
 
-        jenkinsfile_script.printMessage("test ms")
-        jenkinsfile_script.printMessage("printe ms")
-        jenkinsfile_script.printHello()
-        jenkinsfile_script.a()
+            // Lấy thông tin về Git
+            env.GIT_URL = sh(script: "git config --get remote.origin.url", returnStdout: true).trim()
+            env.GIT_BRANCH = sh(script: "git rev-parse --abbrev-ref HEAD", returnStdout: true).trim()
+            env.GIT_COMMIT = sh(script: "git rev-parse HEAD", returnStdout: true).trim()
+        }
+
+        // Tải và sử dụng script từ file Groovy khác
+        def jenkinsfile_script = load 'loadfile1.groovy'
+
+        // Gọi hàm kiểm tra tệp đã thay đổi và chạy script
+        stage('Check Changed Files') {
+            jenkinsfile_script.checkChangedFilesAndRunScripts()
+        }
+        
     } catch (Exception e) {
         // Xử lý lỗi
         echo "Đã xảy ra lỗi: ${e.message}"
-        // Bạn có thể thực hiện các hành động bổ sung như thông báo, log lỗi, v.v.
+        // Thực hiện các hành động bổ sung nếu cần, như thông báo hoặc log lỗi
     }
 }
