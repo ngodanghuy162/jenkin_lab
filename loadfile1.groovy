@@ -5,10 +5,10 @@ def checkChangedFilesAndRunScripts() {
         // Kiểm tra xem tệp nằm trong thư mục A
         if (file.startsWith("A/")) { // Thay đổi này sẽ kiểm tra xem tệp nằm trong thư mục A
             echo "Tệp trong thư mục A đã thay đổi, chạy a.sh"
-            sh 'A/a.sh'
+            //sh 'A/a.sh'
         } else if (file.startsWith("B/")) { // Tương tự cho thư mục B
             echo "Tệp trong thư mục B đã thay đổi, chạy b.sh"
-            sh 'B/b.sh'
+           // sh 'B/b.sh'
         }
     }
 }
