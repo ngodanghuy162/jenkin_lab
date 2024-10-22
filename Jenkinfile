@@ -1,7 +1,5 @@
 node {
     stage('Checkout') {
-        // Lấy mã nguồn từ repository
-                    // Lấy mã nguồn từ repository
         checkout scmGit(branches: [[name: '*/main'], [name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: 'github_credential', url: 'https://github.com/ngodanghuy162/jenkin_lab']])
             // git branch: 'main',
             //     credentialsId: 'github_credential',
