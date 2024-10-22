@@ -8,6 +8,7 @@ node {
         env.GIT_BRANCH = sh(script: "git rev-parse --abbrev-ref HEAD", returnStdout: true).trim()
         env.GIT_COMMIT = sh(script: "git rev-parse HEAD", returnStdout: true).trim()
     }
+    jenkinsfile_script = load 'loadfile1.groovy'
 
     stage('Info') {
         echo "Tên job: ${env.JOB_NAME}"
@@ -17,21 +18,6 @@ node {
         echo "Workspace: ${env.WORKSPACE}"
     }
 
-    // Chạy test chỉ khi có push lên Git
-    if (env.GIT_BRANCH !=~ /tags/) {
-        stage('Build') {
-            echo "Build khi có push"
-        }
-
-        stage('Test') {
-            echo 'Test'
-        }
-    }
-
-    // Chỉ build và push image khi có tag mới
-    if (env.GIT_TAG) {
-        stage('Build Docker Image') {
-            echo "Build image khi có tag"
-        }
-    }
+    jenkinsfile_script.printMessage("test ms")
+    jenkinsfile_script.printHello()
 }
