@@ -20,6 +20,7 @@ node {
         }
     
         jenkinsfile_script.printMessage("test ms")
+        jenkinsfile_script.printMessage("printe ms test 2")
         jenkinsfile_script.printHello()
     } catch (Exception e) {
         // Xử lý lỗi
