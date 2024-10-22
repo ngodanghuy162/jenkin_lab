@@ -1,3 +1,1 @@
-echo "file b"
-pwd
-ls
+echo "Chay file B roi nhe"

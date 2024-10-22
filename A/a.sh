@@ -1,3 +1,1 @@
-echo "File A"
-pwd
-ls
+echo "File A chay r nhe"
