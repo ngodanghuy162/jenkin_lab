@@ -3,6 +3,6 @@ def printMessage(String message) {
 }
 
 def printHello() {
-    echo "Hello funtionc"
+    echo "Hello hello"
 }
 return this
