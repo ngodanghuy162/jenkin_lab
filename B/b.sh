@@ -1,0 +1,2 @@
+echo "file b"
+pwd
